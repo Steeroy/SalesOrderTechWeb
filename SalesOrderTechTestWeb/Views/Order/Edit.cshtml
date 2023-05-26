@@ -1,0 +1,85 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Edit Header";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="create-order">
+    <div>
+        <button class="go-back">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <a asp-action="Index">Back to List</a>
+        </button>
+    </div>
+
+    <h1>Update your order header</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="EditHeader" autocomplete="off">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="order d-flex flex-column">
+                    <h4>Order Header</h4>
+
+                    <div class="order-row row d-flex align-items-center">
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderID" class="control-label"></label>
+                            <input asp-for="OrderID" value="@Model.OrderID" class="form-control" readonly />
+                            <span asp-validation-for="OrderID" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderNumber" class="control-label"></label>
+                            <input asp-for="OrderNumber" value="@Model.OrderNumber" class="form-control" placeholder="E.g. SO456789" />
+                            <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderType" value="@Model.OrderType" class="control-label"></label>
+                            <select asp-for="OrderType" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Perishable">Perishable</option>
+                            </select>
+                            <span asp-validation-for="OrderType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderStatus" class="control-label"></label>
+                            <select asp-for="OrderStatus" value="@Model.OrderStatus" class="form-control">
+                                <option value="New">New</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Complete">Complete</option>
+                            </select>
+                            <span asp-validation-for="OrderStatus" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="CustomerName" class="control-label"></label>
+                            <input asp-for="CustomerName" value="@Model.CustomerName" class="form-control" placeholder="E.g. KFC" />
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderDate" class="control-label"></label>
+                            <input asp-for="OrderDate" value="@Model.OrderDate" class="form-control" />
+                            <span asp-validation-for="OrderDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update Order" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

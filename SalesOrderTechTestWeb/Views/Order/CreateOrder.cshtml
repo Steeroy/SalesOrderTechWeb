@@ -1,0 +1,213 @@
+﻿@model SalesOrderTechTestWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="create-order">
+
+    <div>
+        <button class="go-back">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <a asp-action="Index">Back to List</a>
+        </button>
+    </div>
+
+    <h1>Create your order</h1>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="CreateOrder">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="order d-flex flex-column">
+                    <h4>Order Header</h4>
+
+                    <div class="order-row row d-flex align-items-center">
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderNumber" class="control-label"></label>
+                            <input asp-for="OrderNumber" class="form-control" placeholder="E.g. SO456789" />
+                            <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderType" class="control-label"></label>
+                            <select asp-for="OrderType" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Perishable">Perishable</option>
+                            </select>
+                            <span asp-validation-for="OrderType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderStatus" class="control-label"></label>
+                            <select asp-for="OrderStatus" class="form-control">
+                                <option value="New">New</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Complete">Complete</option>
+                            </select>
+                            <span asp-validation-for="OrderStatus" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="CustomerName" class="control-label"></label>
+                            <input asp-for="CustomerName" class="form-control" placeholder="E.g. KFC"  />
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderDate" class="control-label"></label>
+                            <input asp-for="OrderDate" class="form-control" />
+                            <span asp-validation-for="OrderDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order d-flex flex-column">
+                    <h4>Order Lines</h4>
+
+                    <div class="order-row row d-flex align-items-center">
+                        <div class="form-group col-md-3">
+                            <label>Product Code:</label>
+                            <input type="text" name="OrderLines[0].ProductCode" class="form-control" placeholder="E.g. YTS786663"  />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Product Type:</label>
+                            <select name="OrderLines[0].ProductType" class="form-control">
+                                <option value="Apparel">Apparel</option>
+                                <option value="Parts">Parts</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Motor">Motor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Product Cost Price:</label>
+                            <input type="number" step="0.01" name="OrderLines[0].ProductCostPrice" class="form-control" placeholder="E.g. 8.44" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Product Sales Price:</label>
+                            <input type="number" step="0.01" name="OrderLines[0].ProductSalesPrice" class="form-control" placeholder="E.g. 49.22" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Quantity:</label>
+                            <input type="number" name="OrderLines[0].Quantity" class="form-control" placeholder="E.g. 1" />
+                        </div>
+                    </div>
+
+                    <button type="button" id="addLineButton" class="btn btn-primary"><span>Add Line</span><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+
+                <h5>Added order lines</h5>
+
+                <div id="orderLinesContainer" class="row order-lines-row d-flex align-items-center gap-5">
+                </div>
+
+                <div class="form-group create-button">
+                    <input type="button" id="createOrderBtn" value="Create Order" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            var lineIndex = 0;
+            var orderLines = [];
+            var line = 1;
+
+            $('#createOrderBtn').click(function (){
+                var orderNumber = $("input[name='OrderNumber']").val();
+                var orderType = $("select[name='OrderType']").val();
+                var orderStatus = $("select[name='OrderStatus']").val();
+                var customerName = $("input[name='CustomerName']").val();
+                var orderDate = $("input[name='OrderDate']").val();
+                var formData = $("form").serialize();
+
+                var requestData = {
+                    OrderID: 0,
+                    OrderNumber: orderNumber,
+                    OrderType: orderType,
+                    OrderStatus: orderStatus,
+                    CustomerName: customerName,
+                    OrderDate: orderDate,
+                    OrderLines: orderLines,
+                };
+
+                console.log(requestData);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Order/CreateOrder",
+                    data: requestData,
+                    dataType: "JSON",
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        }
+                    }
+                });
+            });
+
+            $('#addLineButton').click(function () {
+                var productCode = $(`input[name="OrderLines[${lineIndex}].ProductCode"]`).val();
+                var productType = $(`select[name="OrderLines[${lineIndex}].ProductType"]`).val();
+                var productCostPrice = $(`input[name="OrderLines[${lineIndex}].ProductCostPrice"]`).val();
+                var productSalesPrice = $(`input[name="OrderLines[${lineIndex}].ProductSalesPrice"]`).val();
+                var quantity = $(`input[name="OrderLines[${lineIndex}].Quantity"]`).val();
+                var lineNumber = line;
+
+                var orderLine = {
+                    LineId: 0,
+                    ProductCode: productCode,
+                    ProductType: productType,
+                    ProductCostPrice: productCostPrice.toString().replace('.', ','),
+                    ProductSalesPrice: productSalesPrice.toString().replace('.', ','),
+                    Quantity: parseInt(quantity),
+                    LineNum: parseInt(lineNumber),
+                    OrderId: 0,
+                };
+
+                orderLines.push(orderLine);
+                console.log(orderLine);
+
+                line++;
+
+                displayOrderLines();
+            });
+
+            function displayOrderLines() {
+                $('#orderLinesContainer').empty();
+
+                $.each(orderLines, function (index, orderLine) {
+                    var orderLineHtml = `
+                                <div class="col-md-3 line-box">
+                                    <p>Line Number: <span>${orderLine.LineNum}</span></p>
+                                    <p>Product Code: <span>${orderLine.ProductCode}</span></p>
+                                    <p>Product Type: <span>${orderLine.ProductType}</span></p>
+                                    <p>Product Cost: <span>${orderLine.ProductCostPrice}</span></p>
+                                    <p>Product Sales Cost: <span>${orderLine.ProductSalesPrice}</span></p>
+                                    <p>Quantity: <span>${orderLine.Quantity}</span></p>
+                                </div>
+                            `;
+
+                    $('#orderLinesContainer').append(orderLineHtml);
+                });
+            }
+
+
+        });
+    </script>
+}

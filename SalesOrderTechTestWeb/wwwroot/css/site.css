@@ -1,0 +1,603 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+nav {
+    background: #F8F9FA;
+    overflow: hidden;
+    position: relative;
+}
+
+body {
+    margin-bottom: 60px;
+    background: #F8F9FA;
+}
+/* Header and navigation styles */
+header {
+    padding: 22px 160px;
+    overflow: hidden;
+    position: relative;
+}
+
+header .navbar .navbar-brand {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #535A61;
+    text-decoration: none;
+}
+
+/* Partial login side */
+.hidden-input {
+    display: none;
+}
+
+header .navbar .navbar-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+header .navbar .navbar-nav ul li{
+    list-style: none;
+}
+
+header .navbar .navbar-nav ul li a, header .navbar .navbar-nav ul li form button{
+    text-decoration: none;
+    color: #535A61;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+}
+
+
+.login-logout-card {
+    width: 800px !important;
+    background: #F9F9F9;
+}
+
+/* Tab navigation*/
+.login-logout-card {
+    border: none;
+}
+
+.login-logout-card .card-header {
+    background: #F8F9FA;
+    border: none;
+    padding: 0;
+    height: 80px !important;
+}
+
+.login-logout-card ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+    height: 80px !important;
+    
+}
+
+.login-logout-card li.nav-item {
+    width: 50%;
+}
+
+.login-logout-card a {
+    height: 80px !important;
+}
+
+.login-logout-card a.nav-link {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #007BFF;
+    text-align: center;
+    padding: 1rem;
+}
+
+.login-logout-card a.active {
+    background: #E5EDF5 !important;
+    border-radius: 16px 16px 0px 0px;
+    border: none;
+    color: #007BFF !important;
+
+}
+
+.login-logout-card a:hover{
+    border: none;
+}
+
+.login-logout-card .card-body {
+    padding-bottom: 24px;
+    background: #E5EDF5;
+    border-radius: 0px 0px 16px 16px;
+}
+
+.login-logout-card .card-body .welcome-text {
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: #0653A7;
+}
+
+.login-logout-card .card-body form label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #5D646B;
+    letter-spacing: 1.5px;
+}
+
+.login-logout-card .card-body form .icon-input {
+    height: 54px;
+    padding: 4px 16px 4px 18px;
+    display: flex !important;
+    border: 2px solid #5D646B;
+    border-radius: 8px;
+    align-items: center;
+    gap: 16px;
+}
+
+.login-logout-card .card-body form .icon-input i {
+    font-size: 18px;
+    color: #5D646B;
+}
+
+.login-logout-card .card-body form .icon-input input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #5D646B;
+}
+
+.login-logout-card .card-body form .icon-input input::placeholder{
+    color: #8C939B;
+}
+
+.login-logout-card .card-body form .icon-input input:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.login-logout-card .card-body form p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #5D646B;
+}
+
+.login-logout-card .card-body form p a {
+    text-decoration: none;
+    color: #1276DA !important;
+    font-weight: 500 !important;
+}
+
+.login-logout-card .card-body form .btn-primary{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    background: #007BFF;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+
+}
+
+.login-logout-card .card-body form .btn-primary span {
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    color: #E5EDF5;
+}
+
+.login-logout-card .card-body form .btn-primary i {
+    font-size: 20px;
+    color: #E5EDF5;
+}
+
+/* These are styles for the create order page */
+
+.create-order .go-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0px 32px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    gap: 16px;
+    background: #F9F9F9;
+    margin-bottom: 52px;
+}
+
+.create-order .go-back i, .create-order .go-back a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+
+.create-order .go-back a {
+    font-family: "Open Sans", sans-serif;
+}
+
+.create-order h1 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #007BFF;
+    
+}
+
+.create-order .order {
+    gap: 20px;
+}
+
+.create-order .order h4 {
+    margin-top: 32px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #535A61;
+}
+
+.create-order .order .order-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.create-order .order .order-row .form-group label {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333333;
+}
+
+.create-order .order .order-row .form-group input, .create-order .order .order-row .form-group select {
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #5D646B;
+    background: #F9F9F9;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: #515151;
+}
+
+.create-order .order .order-row .form-group input:focus, .create-order .order .order-row .form-group select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.create-order .order button {
+    align-self: start;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height: 42px;
+    padding: 0px 28px;
+    gap: 12px;
+    border-radius: 8px;
+    background: #5D646B;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 32px;
+}
+
+.create-order h5 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #535A61;
+    margin-bottom: 24px;
+}
+
+.create-order .order-lines-row {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.create-order .order-lines-row .line-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid #5D646B;
+    border-radius: 8px;
+}
+
+.create-order .order-lines-row .line-box p{
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #535A61;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.create-order .order-lines-row .line-box p span {
+    font-weight: 600;
+    color: #01438A;
+}
+
+.create-order .create-button input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0px 52px;
+    border-radius: 8px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #E5EDF5;
+}
+
+.create-order .create-button input:active, .create-order .create-button input:focus {
+    box-shadow: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+/* These are styles for the Order Index page */
+
+.view-all-orders {
+    width: 100%;
+}
+
+.view-all-orders .search-row {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 52px;
+}
+
+.view-all-orders .search-row .btn-primary {
+    height: 38px;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    border: none;
+    border-radius: 8px;
+    color: #F9F9F9;
+    font-size: 14px;
+}
+
+.view-all-orders .search-row .btn-primary a {
+    text-decoration: none;
+    color: inherit;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.view-all-orders .search-row .search-create-order .search-by-group h6 {
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #5A5A5A;
+}
+
+.view-all-orders .search-row .search-create-order .search-by-group select {
+    height: 42px;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 !important;
+    width: 184px;
+    border-radius: 8px;
+    background: inherit;
+    border: 1px solid #007BFF;
+    color: #007BFF;
+}
+
+.view-all-orders .search-row .search-create-order .search-by-group select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.view-all-orders .search-row .search-create-order .input-group {
+    height: 42px;
+}
+
+.view-all-orders .search-row .search-create-order .input-group .form-outline input {
+    height: 100%;
+    border-radius: 8px 0px 0px 8px;
+    border-left: 1px solid #007BFF;
+    border-top: 1px solid #007BFF;
+    border-bottom: 1px solid #007BFF;
+    background: inherit;
+
+}
+
+.view-all-orders .search-row .search-create-order .input-group .form-outline input:focus {
+    box-shadow: none;
+}
+
+.view-all-orders .search-row .search-create-order .input-group button {
+    height: 100%;
+    border-radius: 0px 8px 8px 0px;
+    background: #007BFF;
+}
+
+
+.view-all-orders .search-row .search-create-order .search-order {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    gap: 8px;
+    height: 42px;
+    margin: 0px;
+    padding: 4px 12px 4px 8px;
+    border: 2px solid #007BFF;
+    background: #F9F9F9;
+    border-radius: 8px;
+}
+
+.view-all-orders .search-row .search-create-order .search-order input {
+    background: transparent;
+    border: none;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: #007BF7;
+    font-weight: 400;
+
+}
+
+.view-all-orders .search-row .search-create-order .search-order input::placeholder {
+    color: #5B91CB;
+    
+}
+
+.view-all-orders .search-row .search-create-order .search-order input:active, .view-all-orders .search-row .search-create-order .search-order input:focus {
+    outline: none !important;
+    box-shadow: none;
+    border: none;
+}
+
+.view-all-orders .search-row .search-create-order .search-order i {
+    font-size: 14px;
+    color: #007BF7;
+}
+
+
+
+.view-all-orders .orders-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.view-all-orders .orders-row .order-item {
+   flex-basis: calc(33.33% - 20px);
+   margin: 10px;
+   gap: 16px;
+   padding: 20px 20px 20px 16px;
+   background: #EAF1F8;
+   border-radius: 8px;
+}
+
+.view-all-orders .orders-row .order-item .order-item-content p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #333333;
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.view-all-orders .orders-row .order-item .order-item-content p span {
+    color: #2365AD;
+    font-weight: 600;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border: none;
+    border-radius: 8px;
+    width: 148px;
+    height: 36px;
+    color: #E5EDF5;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete button span {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    color: inherit;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete button i {
+    font-size: 14px;
+    color: inherit;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete .edit {
+    background: #2365AD;
+}
+
+.view-all-orders .orders-row .order-item .edit-or-delete .delete {
+    background: #ED2727;
+}
+
+
+/* These are styles for the orderLinePartial */
+.order-lines-grid table {
+    border-collapse: collapse;
+    margin-top: 48px;
+}
+
+.order-lines-grid table th, .order-lines-grid table td {
+    border: none;
+    text-align: center
+}
+
+.order-lines-grid table td .edit-or-delete {
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.order-lines-grid table td .edit-or-delete button, .order-lines-grid table td .edit-or-delete form {
+    height: 38px;
+    width: 108px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    
+}
+
+.order-lines-grid table td .edit-or-delete button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}

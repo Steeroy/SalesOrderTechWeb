@@ -1,0 +1,57 @@
+﻿<!-- _OrderLinesPartial.cshtml -->
+@model List<OrderLine>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Line ID</th>
+            <th>Product Code</th>
+            <th>Cost Price</th>
+            <th>Sales Price</th>
+            <th>Product Type</th>
+            <th>Quantity</th>
+            @if (ViewData["Role"].ToString().ToLower() == "role")
+            {
+                <th>Actions</th>
+            }
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var orderLine in Model)
+        {
+            <tr>
+                <td>@orderLine.LineId</td>
+                <td>@orderLine.ProductCode</td>
+                <td>@orderLine.ProductCostPrice</td>
+                <td>@orderLine.ProductSalesPrice</td>
+                <td>@orderLine.ProductType</td>
+                <td>@orderLine.Quantity</td>
+                @if (ViewData["Role"].ToString().ToLower() == "role")
+                {
+                    <td>
+                        <div class="edit-or-delete d-flex align-items-center justify-space-between">
+                            <button type="button" class="btn btn-primary edit">
+                                <a asp-action="EditOrderLine" asp-route-id="@orderLine.LineId" class="">
+                                    <span>
+                                        Edit
+                                    </span><i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </button>
+
+
+                            <form asp-action="DeleteOrderLine" id="@orderLine.LineId" asp-route-id="@orderLine.LineId">
+                                <button type="submit" class="btn btn-danger delete"
+                                        onclick="return confirm('Are you sure to delete this order line?')">
+                                    <span>Delete</span>
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                }
+                
+            </tr>
+        }
+    </tbody>
+</table>

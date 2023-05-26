@@ -1,0 +1,140 @@
+﻿@model OrderLine
+
+@{
+    ViewData["Title"] = "Edit Header";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="create-order">
+    <div>
+        <button class="go-back">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <a asp-action="Index">Back to List</a>
+        </button>
+    </div>
+
+    <h1>Update your order line</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="EditLineDetails" autocomplete="off">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="order d-flex flex-column">
+                    <h4>Order Header</h4>
+
+                    <div class="order-row row d-flex align-items-center">
+                        <div class="form-group col-md-3">
+                            <label asp-for="LineId" class="control-label"></label>
+                            <input asp-for="LineId" value="@Model.LineId" class="form-control" readonly />
+                            <span asp-validation-for="LineId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="LineNum" class="control-label"></label>
+                            <input asp-for="LineNum" value="@Model.LineNum" class="form-control" readonly />
+                            <span asp-validation-for="LineNum" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label asp-for="OrderId" class="control-label"></label>
+                            <input asp-for="OrderId" value="@Model.OrderId" class="form-control" readonly />
+                            <span asp-validation-for="OrderId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="ProductCode" class="control-label"></label>
+                            <input asp-for="ProductCode" value="@Model.ProductCode" class="form-control" placeholder="E.g. UYT485911" />
+                            <span asp-validation-for="ProductCode" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="ProductType" value="@Model.ProductType" class="control-label"></label>
+                            <select asp-for="ProductType" class="form-control">
+                                <option value="Apparel">Apparel</option>
+                                <option value="Parts">Parts</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Motor">Motor</option>
+                            </select>
+                            <span asp-validation-for="ProductType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="ProductCostPrice" class="control-label"></label>
+                            @{
+                                string num1 = Model.ProductCostPrice.ToString("0.00").Replace(",", ".");
+                            }
+                            <input asp-for="ProductCostPrice" value="@num1" class="form-control" placeholder="E.g. 20.99" />
+                            <span asp-validation-for="ProductCostPrice" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label asp-for="ProductSalesPrice" class="control-label"></label>
+                            @{
+                                string num2 = Model.ProductSalesPrice.ToString("0.00").Replace(",", ".");
+                            }
+                            <input asp-for="ProductSalesPrice" value="@num2" class="form-control" placeholder="E.g. 110.99" />
+                            <span asp-validation-for="ProductSalesPrice" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label asp-for="Quantity" class="control-label"></label>
+                            <input asp-for="Quantity" value="@Model.Quantity" class="form-control" placeholder="E.g. 10" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button id="update-order-line" type="button" value="Update Line" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function (){
+            $('#update-order-line').click(function (){
+                var productCode = $(`input[name="ProductCode"]`).val();
+                var lineId = $(`input[name="LineId"]`).val();
+                var lineNum = $(`input[name="LineNum"]`).val();
+                var orderId = $(`input[name="OrderId"]`).val();
+                var productType = $(`select[name="ProductType"]`).val();
+                var productCostPrice = $(`input[name="ProductCostPrice"]`).val();
+                var productSalesPrice = $(`input[name="ProductSalesPrice"]`).val();
+                var quantity = $(`input[name="Quantity"]`).val();
+                var formData = $("form").serialize();
+
+                var requestData = {
+                    ProductCode: productCode,
+                    LineId: lineId,
+                    LineNum: lineNum,
+                    OrderId: orderId,
+                    ProductType: productType,
+                    ProductCostPrice: productCostPrice.toString().replace('.', ','),
+                    ProductSalesPrice: productSalesPrice.toString().replace('.', ','),
+                    Quantity: quantity
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Order/EditLineDetails",
+                    data: requestData,
+                    dataType: "JSON",
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

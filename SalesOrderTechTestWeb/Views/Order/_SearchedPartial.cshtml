@@ -1,0 +1,44 @@
+﻿@model List<Order>
+
+@if(Model.Count == 0){
+    <h2>There are no items for the searched query</h2>
+}
+else {
+    <div>
+        @foreach (var item in Model)
+        {
+            <div class="order-item d-flex flex-column">
+                <div class="d-flex flex-column gap-1 order-item-content">
+                    <p class="m-0">Order number: <span>@Html.DisplayFor(modelItem => item.OrderNumber)</span></p>
+                    <p class="m-0">Order type: <span>@Html.DisplayFor(modelItem => item.OrderType)</span></p>
+                    <p class="m-0">Order status: <span>@Html.DisplayFor(modelItem => item.OrderStatus)</span></p>
+                    <p class="m-0">Customer name: <span>@Html.DisplayFor(modelItem => item.CustomerName)</span></p>
+                    <p class="m-0">Create Date: <span>@Html.DisplayFor(modelItem => item.OrderDate)</span></p>
+                </div>
+
+                <div class="edit-or-delete d-flex align-items-center justify-space-between">
+                    <button type="button" class="btn btn-primary edit">
+                        <a asp-action="Edit" asp-route-id="@item.OrderID" class="">
+                            <span>
+                                Edit
+                            </span><i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </button>
+
+
+                    <form asp-action="DeleteItem" id="@item.OrderID" asp-route-OrderId="@item.OrderID">
+                        <button type="submit" class="btn btn-danger delete"
+                                onclick="return confirm('Are you sure to delete this record?')">
+                            <span>Delete</span>
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <button type="button" id="order-lines" class="btn btn-primary order-lines">
+                    <span>View lines</span>
+                </button>
+            </div>
+        }
+    </div>
+}
